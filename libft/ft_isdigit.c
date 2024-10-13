@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/13 13:01:32 by ysirkich         ###   ########.fr       */
+/*   Created: 2024/05/10 14:45:11 by ysirkich          #+#    #+#             */
+/*   Updated: 2024/05/10 14:45:16 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FRACTOL_H
-# define	FRACTOL_H
-
-# include <unistd.h>
-# include <stdlib.h>
-# include "mlx.h"
-
-typedef struct s_fractol
+int	ft_isdigit(int c)
 {
-	char	*name;
-	t_mlx	*mlx;
-}	t_fractol;
-
-typedef struct	s_mlx
-{
-	mlx_pointer;
-	mlx_window;
-	img_pointer;
-	///smtng else
-}	t_mlx;
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}

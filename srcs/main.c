@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:30 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/13 10:15:59 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/13 13:15:19 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	main(int argc, char **argv)
 {
 	t_fractol	*fractal;
 
-	if (argc != 2)
+	if (argc < 2)
 		error("Error. Not enough or too many arguments", NULL);//maybe make a specific message with all the fractal options etc in the future
-	fractal = fractal_name_match(argv[1]); // function that checks fractals name
+	fractal = fractal_init(argv[1]); // function that checks fractals name
 	if (!fractal)
 		error("Error. Fractal's name is invalid.", fractal);
 	init_fractal(fractal);

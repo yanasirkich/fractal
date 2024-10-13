@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/13 13:01:32 by ysirkich         ###   ########.fr       */
+/*   Created: 2024/07/30 02:52:38 by ysirkich          #+#    #+#             */
+/*   Updated: 2024/07/30 02:56:18 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FRACTOL_H
-# define	FRACTOL_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "mlx.h"
-
-typedef struct s_fractol
+size_t	ft_strlen(const char *str)
 {
-	char	*name;
-	t_mlx	*mlx;
-}	t_fractol;
+	size_t	i;
 
-typedef struct	s_mlx
-{
-	mlx_pointer;
-	mlx_window;
-	img_pointer;
-	///smtng else
-}	t_mlx;
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}

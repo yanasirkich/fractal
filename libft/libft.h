@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/13 13:01:32 by ysirkich         ###   ########.fr       */
+/*   Created: 2024/05/10 15:07:31 by ysirkich          #+#    #+#             */
+/*   Updated: 2024/09/20 16:45:06 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FRACTOL_H
-# define	FRACTOL_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
-# include <unistd.h>
 # include <stdlib.h>
-# include "mlx.h"
+# include <unistd.h>
+# include <limits.h>
 
-typedef struct s_fractol
-{
-	char	*name;
-	t_mlx	*mlx;
-}	t_fractol;
+int			ft_atoi(const char *str);
+int			ft_strcmp(const char *s1, const char *s2);
+void		ft_putstr_fd(char *s, int fd);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_strdup(const char *s1);
+size_t		ft_strlen(const char *str);
+char		**ft_split(char const *s, char c);
+int			ft_isdigit(int c);
 
-typedef struct	s_mlx
-{
-	mlx_pointer;
-	mlx_window;
-	img_pointer;
-	///smtng else
-}	t_mlx;
+#endif

@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/13 13:01:32 by ysirkich         ###   ########.fr       */
+/*   Created: 2024/05/10 15:03:06 by ysirkich          #+#    #+#             */
+/*   Updated: 2024/09/20 15:33:19 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FRACTOL_H
-# define	FRACTOL_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "mlx.h"
-
-typedef struct s_fractol
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	char	*name;
-	t_mlx	*mlx;
-}	t_fractol;
-
-typedef struct	s_mlx
-{
-	mlx_pointer;
-	mlx_window;
-	img_pointer;
-	///smtng else
-}	t_mlx;
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*(unsigned char *) s1 - *(unsigned char *) s2);
+}

@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 10:01:53 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/13 10:15:10 by ysirkich         ###   ########.fr       */
+/*   Created: 2024/05/10 14:56:32 by ysirkich          #+#    #+#             */
+/*   Updated: 2024/05/30 01:37:36 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "libft.h"
 
-t_fractol	fractal_name_match(char *name)
+char	*ft_strdup(const char *s1)
 {
-	t_fractol	*fractal;
+	char	*s2;
+	int		i;
+	size_t	len;
 
-	fractal = malloc(sizeof(t_fractol));
-	if (!fractal)
-		error("error. Memory allocation failed.", NULL);
-	if (ft_strcmp(name, "Mandelbrot") == 0)
-		fractal->name = "Mandelbrot";
-	if (ft_strcmp(name, "Julia") == 0)
-		fractal->name = "Julia";
-	else
+	i = 0;
+	len = ft_strlen(s1);
+	if (!s1)
 		return (NULL);
+	s2 = (char *)malloc((len + 1) * sizeof(char));
+	if (!s2)
+		return (NULL);
+	while (s1[i])
+	{
+		s2[i] = s1[i];
+		i++;
+	}
+	s2[len] = '\0';
+	return (s2);
 }
