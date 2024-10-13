@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/13 10:35:42 by ysirkich         ###   ########.fr       */
+/*   Created: 2024/10/13 10:01:53 by ysirkich          #+#    #+#             */
+/*   Updated: 2024/10/13 10:15:10 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FRACTOL_H
-# define	FRACTOL_H
+#include "fractol.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-
-typedef struct s_fractol
+t_fractol	fractal_name_match(char *name)
 {
-	char	*name;
-	t_mlx	*mlx;
-}	t_fractol;
+	t_fractol	*fractal;
 
-typedef struct	s_mlx
-{
-	mlx_pointer;
-	mlx_window;
-	img_pointer;
-	///smtng else
-}	t_mlx;
+	fractal = malloc(sizeof(t_fractol));
+	if (!fractal)
+		error("error. Memory allocation failed.", NULL);
+	if (ft_strcmp(name, "Mandelbrot") == 0)
+		fractal->name = "Mandelbrot";
+	if (ft_strcmp(name, "Julia") == 0)
+		fractal->name = "Julia";
+	else
+		return (NULL);
+}
