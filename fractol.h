@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/13 13:01:32 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:03:29 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include "mlx.h"
+# include "MLX42/MLX42.h"
 
 typedef struct s_fractol
 {
@@ -25,8 +25,8 @@ typedef struct s_fractol
 
 typedef struct	s_mlx
 {
-	mlx_pointer;
-	mlx_window;
+	void	*mlx;
+	void	*mlx_window;
 	img_pointer;
 	///smtng else
 }	t_mlx;

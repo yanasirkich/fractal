@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:01:53 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/13 13:45:46 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:50:29 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@ t_fractol	fractal_init(char *name)
 	if (ft_strcmp(name, "Julia") == 0 || ft_strcmp(name, "julia") == 0)
 		julia_init(fractal);
 	else
-	{
-		ft_putendl_fd("Error. Wrong input. Usage: ./fractol [Julia] or [Mandelbrot]", 1);
-		return (NULL);
-	}
-	return (0);
+		error("Error.\n", fractal);
+	return (fractal);
 }
 
 void	*mandelbrot_init()

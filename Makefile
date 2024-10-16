@@ -6,7 +6,7 @@
 #    By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 13:33:17 by ysirkich          #+#    #+#              #
-#    Updated: 2024/10/13 13:39:25 by ysirkich         ###   ########.fr        #
+#    Updated: 2024/10/16 12:20:45 by ysirkich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ RM = rm -f
 CFLAGS = -Wall	-Wextra	-Werror -g
 INCLUDE	=-I. -Iincludes -Ilibft
 
-LIBFT_DIR = ./libft
+LIBMLX = ./lib/MLX42
+
+LIBFT_DIR = ./lib/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBS = -L$(LIBFT_DIR)	-lft
 
