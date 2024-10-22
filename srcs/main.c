@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:30 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/17 20:06:55 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/22 11:39:30 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	main(int argc, char **argv)
 	mlx = init_mlx();
 	//render_fractal(fractal); or | ??
 	mlx_loop_hook(mlx->mlx, render_fractal, fractal); //gonna render fractal continuosly
-	mlx_key_hook(...); //gonna handle events
-	mlx_loop(mlx->mlx);
+	mlx_key_hook(mlx->mlx, mlx_key_hook, fractal); 
+	mlx_loop(mlx->mlx);//gonna handle events
 	free(fractal);
 	free(mlx);
 	return (0);
@@ -41,10 +41,10 @@ t_mlx	*init_mlx(void)
 	mlx = malloc(sizeof(t_mlx));
 	if (!mlx)
 		error("Error. Memory allocation for MLX failed\n", NULL);
-	mlx->mlx = mlx_init(800, 600, "Fractol Window", false);
+	mlx->mlx = mlx_init(HEIGHT, WIDTH, "Fractol Window", false);
 	if(!mlx->mlx)
 		error("Error. MLX initialization failed!\n", mlx); //maybe think of a function that would close mlx properly idk
-	mlx->image = mlx_new_image(mlx->mlx, 800, 600);//maybe make it a separete function later on
+	mlx->image = mlx_new_image(mlx->mlx, HEIGHT, WIDTH);//maybe make it a separete function later on
 	if (!mlx->image)
 		error("Error. Image creation failed!\n", mlx); 
 	return (mlx);
