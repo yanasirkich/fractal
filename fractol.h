@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/23 11:58:02 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/25 12:34:10 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,15 @@
 
 typedef struct s_fractol
 {
-	int		type;
-	int		zoom;
-	int		offset_x;
-	int		offset_y;
-	int		max_iterations;
+	int			type;
+	double		zoom;
+	double		offset_x;
+	double		offset_y;
+	double		min_real;
+	double		max_real;
+	double		min_imag;
+	double		max_imag;
+	int			max_iterations;
 	t_mlx	*mlx;
 }	t_fractol;
 
