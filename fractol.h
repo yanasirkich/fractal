@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/25 12:34:10 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/25 13:59:20 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ typedef struct s_fractol
 	double		min_imag;
 	double		max_imag;
 	int			max_iterations;
-	t_mlx	*mlx;
+	double		cx; //for julia
+	double		cy; //for julia
+	t_mlx		*mlx; //pointer to mlx
 }	t_fractol;
 
 typedef struct	s_mlx

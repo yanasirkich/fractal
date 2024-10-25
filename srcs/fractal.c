@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:01:53 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/25 13:48:43 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/25 14:52:40 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ t_fractol	fractal_init(char *name)
         fractal->max_real = 2.0;
         fractal->min_imag = -2.0;
         fractal->max_imag = 2.0;
+		fractal->cx = -0.7; //constants for julia 
+		fractal->cy = 0.27015;
 		fractal->type = JULIA;
 	}
 	else
@@ -48,48 +50,32 @@ int	*mandelbrot_pixel(t_fractol *fractal, int x, int y)// iterate over the mande
 { //z = z^2 + c z 
 	double	real;
 	double	imaginary;
-
-	double	z_real;
-	double	z_imaginary;
-
-	double	z_sq_real;
-	double	z_sq_imag;
-
 	double	c_real;
 	double	c_imaginary;
-	
+	double	temp_real;
 	int		iterations;
-
-	real = (x - (WIDTH / 2)) / ((WIDTH / 4) * fractal->zoom) + fractal->offset_x;
-	imaginary = (y - (HEIGHT / 2)) / ((HEIGHT / 4) * fractal->zoom) + fractal->offset_y;
-	//initialize z to 0 + 0i
-	z_real = 0.0;
-	z_imaginary = 0.0;
-	z_sq_real = 0.0;
-	z_sq_imag = 0.0;
+	real = 0;
+	imaginary = 0;
+	c_real = fractal->min_real + (x / (double)WIDTH) * (fractal->max_real - fractal->min_real);
+	c_imaginary = fractal->min_imag + (y / (double)HEIGHT) * (fractal->max_imag - fractal->min_imag);
 	iterations = 0;
-	c_real = real; //store the original real and imag values
-	c_imaginary = imaginary;
-	//z = z^2 + c iteration
-	while (z_sq_real + z_sq_imag < 4 && fractal->max_iterations)
+	while (iterations < fractal->max_iterations)
 	{
-		z_imaginary = 2 * z_real * z_imaginary + c_imaginary;
-		z_real = z_sq_real - z_sq_imag + c_real;
-		z_sq_real = z_real * z_real;
-		z_sq_imag = z_imaginary * z_imaginary;
+		if (real * real + imaginary + imaginary > 4)
+			break ;
+		temp_real = real * real - imaginary * imaginary + c_real;
+		imaginary = 2.0 * real * imaginary + c_imaginary;
+		real = temp_real;
 		iterations++;
 	}
-	if (iterations == fractal->max_iterations)
-		return(BLACK);
-	else
-		return (GREEN * iterations / fractal->max_iterations);
 }
 
+// z = z^2 + c for julia
 int	*julia_pixel(t_fractol *fractal, int x, int y)//ill try rbg lets see lol
 {
 	double	real;
 	double	imaginary;
-	double	temporary;
+	double	temp_real;
 	int		iterations;
 
 	real = fractal->min_real + (x / (double)WIDTH) * (fractal->max_real - fractal->min_real);
@@ -100,8 +86,16 @@ int	*julia_pixel(t_fractol *fractal, int x, int y)//ill try rbg lets see lol
 		//escape condition(real^2 + imaginary^2 > 4)
 		if (real * real + imaginary * imaginary > 4)
 			break ;
-		//z^2 (tmp = real^2 - imaginary^2, new imaginary = 2 * real * imaginary)
+		//z^2real = real^2 - imaginary^2 || z^2imag = 2xrealximag
+		temp_real = real * real - imaginary * imaginary + fractal->cx;
+		imaginary = 2.0 * real * imaginary + fractal->cy;
+		real = temp_real;
+		iterations++;
 	}
+	if (iterations == fractal->max_iterations)
+		return (BLACK); //points inside the set
+	else
+		return (get_rgb(iterations, fractal->max_iterations));
 }
 
 void	render_fractal(void *smthg) //generating and displaying fractals
