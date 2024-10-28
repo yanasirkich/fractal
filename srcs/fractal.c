@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:01:53 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/25 14:52:40 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/28 21:46:52 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	*mandelbrot_pixel(t_fractol *fractal, int x, int y)// iterate over the mande
 		real = temp_real;
 		iterations++;
 	}
+	return (get_rgb(iterations, fractal->max_iterations));
 }
 
 // z = z^2 + c for julia
@@ -92,10 +93,7 @@ int	*julia_pixel(t_fractol *fractal, int x, int y)//ill try rbg lets see lol
 		real = temp_real;
 		iterations++;
 	}
-	if (iterations == fractal->max_iterations)
-		return (BLACK); //points inside the set
-	else
-		return (get_rgb(iterations, fractal->max_iterations));
+	return (get_rgb(iterations, fractal->max_iterations));
 }
 
 void	render_fractal(void *smthg) //generating and displaying fractals
@@ -124,4 +122,19 @@ void	render_fractal(void *smthg) //generating and displaying fractals
 		y++;
 	}
 	mlx_image_to_window(mlx->mlx, mlx->image, 0, 0); //image rendering to put it to the window
+}
+
+void	get_rgb(int iterations, int max_iterations)//defines a color based on the number of iterations.
+{
+	int	red;
+	int	green;
+	int	blue;
+
+	if (iterations == fractal->max_iterations)
+		return (BLACK);
+	//colors based on the iteration count
+	red = (iteration % 256);
+	green = (iteration * 2) % 256;
+	blue = (iterations * 2) % 256;
+	return ((red << 16) | (green << 8) | blue);
 }
