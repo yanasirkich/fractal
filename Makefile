@@ -6,7 +6,7 @@
 #    By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 13:33:17 by ysirkich          #+#    #+#              #
-#    Updated: 2024/10/16 12:20:45 by ysirkich         ###   ########.fr        #
+#    Updated: 2024/10/28 22:20:30 by ysirkich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,19 +14,22 @@ NAME = 	fractol
 CC = gcc
 RM = rm -f
 CFLAGS = -Wall	-Wextra	-Werror -g
-INCLUDE	=-I. -Iincludes -Ilibft
+INCLUDE	=-I. -Iincludes -Ilibft -Ilib/MLX42/include
 
 LIBMLX = ./lib/MLX42
 
 LIBFT_DIR = ./lib/libft
 LIBFT = $(LIBFT_DIR)/libft.a
-LIBS = -L$(LIBFT_DIR)	-lft
+LIBS = -L$(LIBFT_DIR)	-lft	-L$(LIBMLX) -lmlx42
 
 # Source directories
 SRCS_DIR = srcs
 
 # Source files
 SRCS =	$(SRCS_DIR)/main.c	\
+		$(SRCS_DIR)/fractals.c	\
+		$(SRCS_DIR)/render.c	\
+		$(SRCS_DIR)/innit.c	\
 		# dont forget to add all files at some point 
 
 # Object files
