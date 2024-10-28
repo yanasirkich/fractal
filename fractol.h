@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/28 21:30:01 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/28 22:04:27 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,3 +45,14 @@ typedef struct	s_mlx
 	void	*image;
 	///smtng else
 }	t_mlx;
+//other
+int	error (char *text, t_fractol *fractal);
+//innits
+t_fractol	fractal_init(char *name);
+t_mlx	*init_mlx(void)
+//rendering
+void	render_fractal(void *smthg);
+void	get_rgb(int iterations, int max_iterations);
+//fractals
+int	*mandelbrot_pixel(t_fractol *fractal, int x, int y);
+int	*julia_pixel(t_fractol *fractal, int x, int y);

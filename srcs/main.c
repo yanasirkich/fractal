@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:30 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/22 11:39:30 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/28 22:02:42 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,6 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-t_mlx	*init_mlx(void)
-{
-	t_mlx	*mlx;
-
-	mlx = malloc(sizeof(t_mlx));
-	if (!mlx)
-		error("Error. Memory allocation for MLX failed\n", NULL);
-	mlx->mlx = mlx_init(HEIGHT, WIDTH, "Fractol Window", false);
-	if(!mlx->mlx)
-		error("Error. MLX initialization failed!\n", mlx); //maybe think of a function that would close mlx properly idk
-	mlx->image = mlx_new_image(mlx->mlx, HEIGHT, WIDTH);//maybe make it a separete function later on
-	if (!mlx->image)
-		error("Error. Image creation failed!\n", mlx); 
-	return (mlx);
-}
 int	error (char *text, t_fractol *fractal)
 {
 	ft_putstr_fd(text, 2);
