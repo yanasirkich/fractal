@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:30 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/29 14:28:20 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:35:05 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,21 @@ int	main(int argc, char **argv)
 	//	error("Error. Fractal's name is invalid.\n", fractal);
 	mlx = init_mlx();
 	mlx_key_hook(mlx->mlx, key_callback, fractal); 
+	mlx_close_hook(mlx->mlx, close_callback, fractal);
+	mlx_scroll_hook(mlx->mlx, scroll_callback, fractal);
 	mlx_loop_hook(mlx->mlx, render_fractal, fractal); //gonna render fractal continuosly
+
 	mlx_loop(mlx->mlx);//gonna handle events
+
 	free(fractal);
 	free(mlx);
 	return (0);
 }
 
-void	key_callback() //process key events and close the window when the escape key is pressed.
-{
-
-}
-
-int	error (char *text, t_fractol *fractal)
+int	error (char *text, void *data)
 {
 	ft_putstr_fd(text, 2);
-	if (fractal)
-		free(fractal);
+	if (data)
+		free(data);
 	exit(EXIT_FAILURE);
 }

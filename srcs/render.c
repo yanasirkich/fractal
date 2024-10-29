@@ -6,11 +6,11 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 21:54:49 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/28 21:55:46 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:31:16 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractal.h"
+#include "fractol.h"
 
 void	render_fractal(void *smthg) //generating and displaying fractals
 {
@@ -20,17 +20,17 @@ void	render_fractal(void *smthg) //generating and displaying fractals
 	int			x;
 	int			y;
 
-	fractal = (t_fractal *)smthg;
+	fractal = (t_fractol *)smthg;
 	mlx = fractal->mlx;
-	y = 0
+	y = 0;
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			if (fractal->type == MANDELBROT)
+			if (fractal->type == 1)
 				color = mandelbrot_pixel(fractal, x , y);
-			else if (fractal->type == JULIA)
+			else if (fractal->type == 2)
 				color = julia_pixel(fractal, x, y);
 			mlx_put_pixel(mlx->image, x, y, color);
 			x++;
@@ -40,7 +40,7 @@ void	render_fractal(void *smthg) //generating and displaying fractals
 	mlx_image_to_window(mlx->mlx, mlx->image, 0, 0); //image rendering to put it to the window
 }
 
-void	get_rgb(int iterations, int max_iterations)//defines a color based on the number of iterations.
+int	get_rgb(int iterations, t_fractol *fractal)//defines a color based on the number of iterations.
 {
 	int	red;
 	int	green;
@@ -49,8 +49,8 @@ void	get_rgb(int iterations, int max_iterations)//defines a color based on the n
 	if (iterations == fractal->max_iterations)
 		return (BLACK);
 	//colors based on the iteration count
-	red = (iteration % 256);
-	green = (iteration * 2) % 256;
+	red = (iterations % 256);
+	green = (iterations * 2) % 256;
 	blue = (iterations * 2) % 256;
 	return ((red << 16) | (green << 8) | blue);
 }

@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 22:01:46 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/29 13:24:39 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:28:39 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_fractol	*fractal_init(char *name)
         fractal->max_real = 1.0;
         fractal->min_imag = -1.5;
         fractal->max_imag = 1.5;
-		fractal->type = MANDELBROT;
+		fractal->type = 1;
 	}
 	else if (ft_strcmp(name, "Julia") == 0 || ft_strcmp(name, "julia") == 0)
 	{
@@ -39,7 +39,7 @@ t_fractol	*fractal_init(char *name)
         fractal->max_imag = 2.0;
 		fractal->cx = -0.7; //constants for julia 
 		fractal->cy = 0.27015;
-		fractal->type = JULIA;
+		fractal->type = 2;
 	}
 	else
 		error("Error. smth\n", fractal);

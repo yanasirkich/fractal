@@ -6,13 +6,13 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:01:53 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/28 22:02:21 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:31:38 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	*mandelbrot_pixel(t_fractol *fractal, int x, int y)// iterate over the mandelbrot equation and determine how quickly the point escapes
+int	mandelbrot_pixel(t_fractol *fractal, int x, int y)// iterate over the mandelbrot equation and determine how quickly the point escapes
 { //z = z^2 + c z 
 	double	real;
 	double	imaginary;
@@ -34,11 +34,11 @@ int	*mandelbrot_pixel(t_fractol *fractal, int x, int y)// iterate over the mande
 		real = temp_real;
 		iterations++;
 	}
-	return (get_rgb(iterations, fractal->max_iterations));
+	return (get_rgb(iterations, fractal));
 }
 
 // z = z^2 + c for julia
-int	*julia_pixel(t_fractol *fractal, int x, int y)//ill try rbg lets see lol
+int	julia_pixel(t_fractol *fractal, int x, int y)//ill try rbg lets see lol
 {
 	double	real;
 	double	imaginary;
@@ -59,5 +59,5 @@ int	*julia_pixel(t_fractol *fractal, int x, int y)//ill try rbg lets see lol
 		real = temp_real;
 		iterations++;
 	}
-	return (get_rgb(iterations, fractal->max_iterations));
+	return (get_rgb(iterations, fractal));
 }

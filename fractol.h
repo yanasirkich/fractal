@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/29 13:28:14 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:35:20 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "./lib/MLX42/include/MLX42/MLX42.h"
+# include "./lib/libft/libft.h"
 
 # define WIDTH 1280
 # define HEIGHT 720
@@ -47,15 +48,19 @@ typedef struct s_fractol
 }	t_fractol;
 
 //other
-int	error (char *text, t_fractol *fractal);
+int	error (char *text, void *data);
 //innits
 t_fractol	*fractal_init(char *name);
 t_mlx	*init_mlx(void);
 //rendering
 void	render_fractal(void *smthg);
-void	get_rgb(int iterations, int max_iterations);
+int	get_rgb(int iterations, t_fractol *fractal);
 //fractals
-int	*mandelbrot_pixel(t_fractol *fractal, int x, int y);
-int	*julia_pixel(t_fractol *fractal, int x, int y);
+int	mandelbrot_pixel(t_fractol *fractal, int x, int y);
+int	julia_pixel(t_fractol *fractal, int x, int y);
+//events
+void	key_callback(mlx_key_data_t keydata, void *param);
+void	close_callback(void *param);
+void	scroll_callback(double xdelta, double ydelta, void *param);
 
 #endif

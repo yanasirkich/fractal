@@ -6,7 +6,7 @@
 #    By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 13:33:17 by ysirkich          #+#    #+#              #
-#    Updated: 2024/10/28 22:20:30 by ysirkich         ###   ########.fr        #
+#    Updated: 2024/10/29 18:26:58 by ysirkich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,15 @@ NAME = 	fractol
 CC = gcc
 RM = rm -f
 CFLAGS = -Wall	-Wextra	-Werror -g
-INCLUDE	=-I. -Iincludes -Ilibft -Ilib/MLX42/include
+INCLUDE	=-I. -Iincludes -I$(LIBFT_DIR) -I$(LIBMLX_DIR)
 
-LIBMLX = ./lib/MLX42
+LIBMLX_DIR = ./lib/MLX42
+LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a
 
 LIBFT_DIR = ./lib/libft
 LIBFT = $(LIBFT_DIR)/libft.a
-LIBS = -L$(LIBFT_DIR)	-lft	-L$(LIBMLX) -lmlx42
+
+LIBS = -L$(LIBFT_DIR) -ldl -lglfw -lm $(LIBMLX)
 
 # Source directories
 SRCS_DIR = srcs
@@ -40,26 +42,31 @@ OBJ = $(SRCS:.c=.o)
 	@echo "Compiling $<..."
 	@$(CC)	$(CFLAGS)	$(INCLUDE)	-c	$<	-o	$@
 
-$(NAME):	$(OBJ)	$(LIBFT)
+$(NAME):	$(OBJ)	$(LIBFT)	$(LIBMLX)
 			@echo "Linking stuff..."
 			@$(CC)	$(CFLAGS)	$(OBJ)	$(LIBS)	-o	$(NAME)
 			@echo "$(NAME) created successfully!"
 $(LIBFT):
 		@echo "Building libft..."
 		@$(MAKE)	-C	$(LIBFT_DIR)
+$(LIBMLX):
+	@mkdir -p $(LIBMLX_DIR)/build
+	@cd $(LIBMLX_DIR)/build && cmake .. && make
 
-all	:	$(NAME)
+all	: libft libmlx42	$(NAME)
 
 clean:
 	@echo "Cleaning object files..."
 	@$(RM)	$(OBJ)
 	@$(MAKE)	-C	$(LIBFT_DIR) clean
+	@$(MAKE)	-C $(LIBMLX_DIR)/build clean
 
 fclean:
 	@echo "Removing executable..."
 	@$(RM) $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(LIBMLX42_DIR)/build fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re 
+.PHONY: all libft libmlx42 clean fclean re
