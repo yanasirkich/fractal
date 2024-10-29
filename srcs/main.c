@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:30 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/28 22:02:42 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/29 14:28:20 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,22 @@ int	main(int argc, char **argv)
 	t_mlx		*mlx;
 
 	if (argc != 2)
-		error("Error. Not enough or too many arguments\n", NULL);//maybe make a specific message with all the fractal options etc in the future
-	fractal = fractal_init(argv[1]); // function that checks fractals name
-	if (!fractal)
-		error("Error. Fractal's name is invalid.\n", fractal);
+		error("Error. Not enough or too many arguments\n", NULL);//make a specific message with all the fractal options etc in the future
+	fractal = fractal_init(argv[1]);
+	//if (!fractal)
+	//	error("Error. Fractal's name is invalid.\n", fractal);
 	mlx = init_mlx();
-	//render_fractal(fractal); or | ??
+	mlx_key_hook(mlx->mlx, key_callback, fractal); 
 	mlx_loop_hook(mlx->mlx, render_fractal, fractal); //gonna render fractal continuosly
-	mlx_key_hook(mlx->mlx, mlx_key_hook, fractal); 
 	mlx_loop(mlx->mlx);//gonna handle events
 	free(fractal);
 	free(mlx);
 	return (0);
+}
+
+void	key_callback() //process key events and close the window when the escape key is pressed.
+{
+
 }
 
 int	error (char *text, t_fractol *fractal)

@@ -6,13 +6,13 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 22:01:46 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/28 22:02:38 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/29 13:24:39 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_fractol	fractal_init(char *name)
+t_fractol	*fractal_init(char *name)
 {
 	t_fractol	*fractal;
 
@@ -31,7 +31,7 @@ t_fractol	fractal_init(char *name)
         fractal->max_imag = 1.5;
 		fractal->type = MANDELBROT;
 	}
-	if (ft_strcmp(name, "Julia") == 0 || ft_strcmp(name, "julia") == 0)
+	else if (ft_strcmp(name, "Julia") == 0 || ft_strcmp(name, "julia") == 0)
 	{
 		fractal->min_real = -2.0;
         fractal->max_real = 2.0;
