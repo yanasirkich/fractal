@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:18:56 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/29 16:19:37 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/29 18:45:38 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ void	scroll_callback(double xdelta, double ydelta, void *param)
 	t_fractol	*fractal;
 
 	fractal = (t_fractol *)param;
+	(void)xdelta; //unused parameter
 	//scroll up (zoom in) when ydelta > 0, scroll down (zoom out) when ydelta < 0
 	if (ydelta > 0)
 		fractal->zoom *= ZOOM_FACTOR;
 	else if (ydelta < 0)
-		fracta;->zoom /= ZOOM_FACTOR;
+		fractal->zoom /= ZOOM_FACTOR;
 }

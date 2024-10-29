@@ -6,11 +6,11 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/29 16:35:20 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/10/29 18:48:02 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	FRACTOL_H
+#ifndef		FRACTOL_H
 # define	FRACTOL_H
 
 # include <unistd.h>
@@ -21,7 +21,8 @@
 # define WIDTH 1280
 # define HEIGHT 720
 
-#define BLACK 0x000000
+# define BLACK 0x000000
+# define ZOOM_FACTOR 1.1 //10% zoom maybe do 1.05 in the future
 
 typedef struct	s_mlx
 {

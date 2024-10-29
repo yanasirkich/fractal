@@ -6,7 +6,7 @@
 #    By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 13:33:17 by ysirkich          #+#    #+#              #
-#    Updated: 2024/10/29 18:26:58 by ysirkich         ###   ########.fr        #
+#    Updated: 2024/10/29 19:51:19 by ysirkich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = 	fractol
 CC = gcc
 RM = rm -f
 CFLAGS = -Wall	-Wextra	-Werror -g
-INCLUDE	=-I. -Iincludes -I$(LIBFT_DIR) -I$(LIBMLX_DIR)
+INCLUDE	=-I. -I$(LIBFT_DIR) -I$(LIBMLX_DIR)
 
 LIBMLX_DIR = ./lib/MLX42
 LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a
@@ -22,16 +22,17 @@ LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a
 LIBFT_DIR = ./lib/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-LIBS = -L$(LIBFT_DIR) -ldl -lglfw -lm $(LIBMLX)
+LIBS = -L$(LIBFT_DIR) $(LIBMLX) -ldl -lm -lglfw -lGL
 
 # Source directories
 SRCS_DIR = srcs
 
 # Source files
-SRCS =	$(SRCS_DIR)/main.c	\
+SRCS =	$(SRCS_DIR)/main.c		\
 		$(SRCS_DIR)/fractals.c	\
 		$(SRCS_DIR)/render.c	\
-		$(SRCS_DIR)/innit.c	\
+		$(SRCS_DIR)/innit.c		\
+		$(SRCS_DIR)/events.c	\
 		# dont forget to add all files at some point 
 
 # Object files
@@ -53,7 +54,7 @@ $(LIBMLX):
 	@mkdir -p $(LIBMLX_DIR)/build
 	@cd $(LIBMLX_DIR)/build && cmake .. && make
 
-all	: libft libmlx42	$(NAME)
+all	: libft libmlx	$(NAME)
 
 clean:
 	@echo "Cleaning object files..."
@@ -65,8 +66,8 @@ fclean:
 	@echo "Removing executable..."
 	@$(RM) $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@$(MAKE) -C $(LIBMLX42_DIR)/build fclean
+	@$(MAKE) -C $(LIBMLX_DIR)/build fclean
 
 re: fclean all
 
-.PHONY: all libft libmlx42 clean fclean re
+.PHONY: all libft libmlx clean fclean re
