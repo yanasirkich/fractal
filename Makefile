@@ -6,7 +6,7 @@
 #    By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 13:33:17 by ysirkich          #+#    #+#              #
-#    Updated: 2024/10/29 19:51:19 by ysirkich         ###   ########.fr        #
+#    Updated: 2024/10/30 13:20:33 by ysirkich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a
 LIBFT_DIR = ./lib/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-LIBS = -L$(LIBFT_DIR) $(LIBMLX) -ldl -lm -lglfw -lGL
+LIBS = $(LIBFT) $(LIBMLX) -ldl -lm -lglfw -lGL
 
 # Source directories
 SRCS_DIR = srcs
