@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 22:01:46 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/03 12:08:03 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/03 13:01:11 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,26 @@ t_fractol	*fractal_init(char *name)
 	fractal = malloc(sizeof(t_fractol));
 	if (!fractal)
 		error("fractal_init", "Error. Memory allocation failed.", NULL);
+	
+	fractal->mlx = NULL; // Set to NULL initially
+    fractal->zoom = 1.0;
+    fractal->offset_x = 0;
+    fractal->offset_y = 0;
+    fractal->max_iterations = 100;
+    fractal->min_real = 0.0;
+    fractal->max_real = 0.0; 
+    fractal->min_imag = 0.0; 
+    fractal->max_imag = 0.0; 
+    fractal->cx = 0.0; 
+    fractal->cy = 0.0; 
+    fractal->type = 0;
 	fractal->mlx = malloc(sizeof(t_mlx));
     if (!fractal->mlx)
     {
         free(fractal);
-        return NULL; // Handle allocation failure
-    }
+		error("fractal_init", "Memory allocation failed for MLX.", NULL);    
+	}
+	printf("MLX struct allocated within fractal.\n"); // DEBUG
 	fractal->zoom = 1.0;
 	fractal->offset_x = 0;
 	fractal->offset_y = 0;
@@ -36,6 +50,7 @@ t_fractol	*fractal_init(char *name)
         fractal->min_imag = -1.5;
         fractal->max_imag = 1.5;
 		fractal->type = 1;
+		printf("Mandelbrot parameters set.\n"); //DEBUG
 	}
 	else if (ft_strcmp(name, "Julia") == 0 || ft_strcmp(name, "julia") == 0)
 	{
@@ -46,12 +61,13 @@ t_fractol	*fractal_init(char *name)
 		fractal->cx = -0.7; //constants for julia 
 		fractal->cy = 0.27015;
 		fractal->type = 2;
+		printf("JUlia parameters set.\n");  //DEBUG
 	}
 	else
 	{
 		free(fractal->mlx); // Free the mlx before returning
         free(fractal);
-		error("fractal_init", "Error. smth\n", fractal);
+		error("fractal_init", "Error. Invalid fractal name provided.\n\n", NULL);
 	}
 	return (fractal);
 }
@@ -63,14 +79,18 @@ t_mlx	*init_mlx(void)
 	mlx = malloc(sizeof(t_mlx));
 	if (!mlx)
 		error("init_mlx","Error. Memory allocation for MLX failed\n", NULL);
+	printf("Allocated MLX struct.\n"); //DEBUG
 	mlx->mlx = mlx_init(HEIGHT, WIDTH, "Fractol Window", false);
 	if(!mlx->mlx)
 		error("init_mlx","Error. MLX initialization failed!\n", mlx); //maybe think of a function that would close mlx properly idk
+	printf("MLX initialized successfully.\n");
 	mlx->image = mlx_new_image(mlx->mlx, HEIGHT, WIDTH);//maybe make it a separete function later on
-	if (!mlx->image)
+	if (!mlx || !mlx->image)
 	{
+		 fprintf(stderr, "MLX image creation failed with height: %d, width: %d\n", HEIGHT, WIDTH);
 		mlx_terminate(mlx->mlx);
 		error("init_mlx","Error. Image creation failed!\n", mlx); 
 	}
+	printf("Image created successfully.\n"); //DEBUG
 	return (mlx);
 }
