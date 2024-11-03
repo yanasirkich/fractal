@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 22:01:46 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/29 16:28:39 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/03 12:08:03 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@ t_fractol	*fractal_init(char *name)
 
 	fractal = malloc(sizeof(t_fractol));
 	if (!fractal)
-		error("Error. Memory allocation failed.", NULL);
+		error("fractal_init", "Error. Memory allocation failed.", NULL);
+	fractal->mlx = malloc(sizeof(t_mlx));
+    if (!fractal->mlx)
+    {
+        free(fractal);
+        return NULL; // Handle allocation failure
+    }
 	fractal->zoom = 1.0;
 	fractal->offset_x = 0;
 	fractal->offset_y = 0;
@@ -42,7 +48,11 @@ t_fractol	*fractal_init(char *name)
 		fractal->type = 2;
 	}
 	else
-		error("Error. smth\n", fractal);
+	{
+		free(fractal->mlx); // Free the mlx before returning
+        free(fractal);
+		error("fractal_init", "Error. smth\n", fractal);
+	}
 	return (fractal);
 }
 
@@ -52,12 +62,15 @@ t_mlx	*init_mlx(void)
 
 	mlx = malloc(sizeof(t_mlx));
 	if (!mlx)
-		error("Error. Memory allocation for MLX failed\n", NULL);
+		error("init_mlx","Error. Memory allocation for MLX failed\n", NULL);
 	mlx->mlx = mlx_init(HEIGHT, WIDTH, "Fractol Window", false);
 	if(!mlx->mlx)
-		error("Error. MLX initialization failed!\n", mlx); //maybe think of a function that would close mlx properly idk
+		error("init_mlx","Error. MLX initialization failed!\n", mlx); //maybe think of a function that would close mlx properly idk
 	mlx->image = mlx_new_image(mlx->mlx, HEIGHT, WIDTH);//maybe make it a separete function later on
 	if (!mlx->image)
-		error("Error. Image creation failed!\n", mlx); 
+	{
+		mlx_terminate(mlx->mlx);
+		error("init_mlx","Error. Image creation failed!\n", mlx); 
+	}
 	return (mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/10/29 18:48:02 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/03 12:09:35 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h> //delete later bc of norm
+
 # include "./lib/MLX42/include/MLX42/MLX42.h"
 # include "./lib/libft/libft.h"
 
@@ -49,7 +51,7 @@ typedef struct s_fractol
 }	t_fractol;
 
 //other
-int	error (char *text, void *data);
+int	error (const char *function, char *text, void *data);
 //innits
 t_fractol	*fractal_init(char *name);
 t_mlx	*init_mlx(void);
