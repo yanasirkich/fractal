@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:30 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/04 02:24:38 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/04 03:15:13 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,39 +17,42 @@
 int	main(int argc, char **argv)
 {
 	t_fractol	*fractal;
-	t_mlx		*mlx;
+	//t_mlx		*mlx;
 
 	if (argc != 2)
 		error("main", "Error. Not enough or too many arguments\n", NULL);//make a specific message with all the fractal options etc in the future
 	fractal = fractal_init(argv[1]);
-	if (!fractal)
-		error("main","Error. Fractal's name is invalid.\n", fractal);
-	mlx = init_mlx();
-	if (!mlx || !mlx->image) 
-		error("main","Error: MLX initialization failed!\n", mlx);
-	printf("Fractal pointer: %p\n", (void *)fractal); 			//DEBUG
-    printf("Fractal mlx pointer: %p\n", (void *)fractal->mlx);	//DEBUG
-    printf("MLX image pointer: %p\n", (void *)mlx->image); 		//DEBUG
-	mlx_key_hook(mlx->mlx, key_callback, fractal); 
-	mlx_close_hook(mlx->mlx, close_callback, fractal);
-	mlx_scroll_hook(mlx->mlx, scroll_callback, fractal);
-	if (!fractal || !fractal->mlx || !fractal->mlx->image) 
+	//if (!fractal)
+		//error("main","Error. Fractal's name is invalid.\n", fractal);
+	if (!fractal || !fractal->mlx || !fractal->mlx->image) //FAILING HERE AGHHH
 	{
 		fprintf(stderr, "Initialization failed: fractal, fractal->mlx, or fractal->mlx->image is NULL\n");
-		free(fractal->mlx);
-		free(fractal);
+		if (fractal) {
+			free(fractal->mlx);
+			free(fractal);
+		}
 		return EXIT_FAILURE;
 	}
-
+	printf("Fractal pointer: %p\n", (void *)fractal);				//DEBUG
+    printf("Fractal mlx pointer: %p\n", (void *)fractal->mlx);		//DEBUG
+    printf("MLX image pointer: %p\n", (void *)fractal->mlx->image);	//DEBUG
+	//mlx = init_mlx();
+	//if (!mlx || !mlx->image) 
+	//	error("main","Error: MLX initialization failed!\n", mlx);
+	mlx_key_hook(fractal->mlx->mlx, key_callback, fractal); 
+	mlx_close_hook(fractal->mlx->mlx, close_callback, fractal);
+	mlx_scroll_hook(fractal->mlx->mlx, scroll_callback, fractal);
 	mlx_loop_hook((mlx_t *)fractal->mlx->mlx, render_fractal, fractal);
-	printf("Entering MLX loop...\n"); 							//DEBUG
+	if (!fractal || !fractal->mlx || !fractal->mlx->image) 
 	
-	mlx_loop(mlx->mlx);//gonna handle events
+	printf("Entering MLX loop...\n"); 	//DEBUG						//DEBUG
+	
+	mlx_loop(fractal->mlx->mlx);//gonna handle events
 
-	mlx_delete_image(mlx->mlx, mlx->image);
-    mlx_terminate(mlx->mlx);
+	mlx_delete_image(fractal->mlx->mlx, fractal->mlx->image);
+    mlx_terminate(fractal->mlx->mlx);
 	free(fractal);
-	free(mlx);
+	free(fractal->mlx);
 	return (0);
 }
 

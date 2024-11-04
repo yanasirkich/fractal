@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/03 12:27:13 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/04 03:03:42 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define BLACK 0x000000
 # define ZOOM_FACTOR 1.1 //10% zoom maybe do 1.05 in the future
 
+//mlx instance is stored inside the fractal struct
 typedef struct	s_mlx
 {
 	void	*mlx;

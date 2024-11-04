@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 22:01:46 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/04 02:11:10 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/04 04:05:39 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,15 @@ t_fractol	*fractal_init(char *name)
 	fractal = malloc(sizeof(t_fractol));
 	if (!fractal)
 		error("fractal_init", "Error. Memory allocation failed.", NULL);
-	
-	fractal->mlx = NULL; // Set to NULL initially
-    fractal->zoom = 1.0;
+	//fractal->mlx = malloc(sizeof(t_mlx));
+	fractal->mlx = init_mlx();
+    if (!fractal->mlx)
+    {
+		free(fractal);  
+		error("fractal_init", "Memory allocation failed for MLX.", NULL);
+	}
+	printf("MLX struct allocated within fractal.\n"); // DEBUG
+    fractal->zoom = 1.0;	//a separete function at some pont
     fractal->offset_x = 0;
     fractal->offset_y = 0;
     fractal->max_iterations = 100;
@@ -32,18 +38,6 @@ t_fractol	*fractal_init(char *name)
     fractal->cx = 0.0; 
     fractal->cy = 0.0; 
     fractal->type = 0;
-	fractal->mlx = malloc(sizeof(t_mlx));
-    if (!fractal->mlx)
-    {
-		free(fractal);
-        fprintf(stderr, "Error allocating memory for fractal->mlx\n");
-        return NULL;   
-	}
-	printf("MLX struct allocated within fractal.\n"); // DEBUG
-	fractal->zoom = 1.0;
-	fractal->offset_x = 0;
-	fractal->offset_y = 0;
-	fractal->max_iterations = 100;
 	if (ft_strcmp(name, "Mandelbrot") == 0 || ft_strcmp(name, "mandelbrot") == 0)
 	{
 		fractal->min_real = -2.0;
