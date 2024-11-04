@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:30 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/04 05:31:06 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/04 20:24:33 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@ int	error (const char *function, char *text, t_fractol *fractal)
 	if (fractal)
 	{
 		if (fractal->mlx)
-		{
+		{	if (fractal->mlx->mlx)
+				mlx_terminate(fractal->mlx->mlx);
 			if (fractal->mlx->image)
 				mlx_delete_image(fractal->mlx->mlx, fractal->mlx->image);
+			free(fractal->mlx);
 		}
-		free(fractal->mlx);
 		free(fractal);
 	}
 	exit(EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 21:54:49 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/04 02:20:04 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/04 20:32:04 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ void	render_fractal(void *smthg) //generating and displaying fractals
 	mlx = fractal->mlx;
 	y = 0;
 	if (!fractal || !fractal->mlx || !fractal->mlx->image) 
-	{
-    	fprintf(stderr, "Error: fractal or fractal->mlx or mlx->image is NULL\n");
-    	return;
-	}
+    	error("render_fractal", "Error. fractal or fractal->mlx or mlx->image is NULL\n", fractal);
 	while (y < HEIGHT)
 	{
 		x = 0;
