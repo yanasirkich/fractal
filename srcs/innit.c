@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 22:01:46 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/03 13:01:11 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/04 02:11:10 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ t_fractol	*fractal_init(char *name)
 	fractal->mlx = malloc(sizeof(t_mlx));
     if (!fractal->mlx)
     {
-        free(fractal);
-		error("fractal_init", "Memory allocation failed for MLX.", NULL);    
+		free(fractal);
+        fprintf(stderr, "Error allocating memory for fractal->mlx\n");
+        return NULL;   
 	}
 	printf("MLX struct allocated within fractal.\n"); // DEBUG
 	fractal->zoom = 1.0;
@@ -82,14 +83,20 @@ t_mlx	*init_mlx(void)
 	printf("Allocated MLX struct.\n"); //DEBUG
 	mlx->mlx = mlx_init(HEIGHT, WIDTH, "Fractol Window", false);
 	if(!mlx->mlx)
-		error("init_mlx","Error. MLX initialization failed!\n", mlx); //maybe think of a function that would close mlx properly idk
+	{
+		fprintf(stderr, "Error initializing MLX42 instance.\n");
+		free(mlx);
+		return NULL;
+		//error("init_mlx","Error. MLX initialization failed!\n", mlx); //maybe think of a function that would close mlx properly idk
+	}
 	printf("MLX initialized successfully.\n");
 	mlx->image = mlx_new_image(mlx->mlx, HEIGHT, WIDTH);//maybe make it a separete function later on
 	if (!mlx || !mlx->image)
 	{
-		 fprintf(stderr, "MLX image creation failed with height: %d, width: %d\n", HEIGHT, WIDTH);
-		mlx_terminate(mlx->mlx);
-		error("init_mlx","Error. Image creation failed!\n", mlx); 
+		fprintf(stderr, "Error initializing MLX42 instance.\n");		mlx_terminate(mlx->mlx);
+		free(mlx);
+		return NULL;
+		//error("init_mlx","Error. Image creation failed!\n", mlx); 
 	}
 	printf("Image created successfully.\n"); //DEBUG
 	return (mlx);
