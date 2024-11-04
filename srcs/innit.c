@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 22:01:46 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/04 04:05:39 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/04 05:55:01 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,9 @@ t_fractol	*fractal_init(char *name)
 	fractal = malloc(sizeof(t_fractol));
 	if (!fractal)
 		error("fractal_init", "Error. Memory allocation failed.", NULL);
-	//fractal->mlx = malloc(sizeof(t_mlx));
 	fractal->mlx = init_mlx();
     if (!fractal->mlx)
-    {
-		free(fractal);  
-		error("fractal_init", "Memory allocation failed for MLX.", NULL);
-	}
+		error("fractal_init", "Memory allocation failed for MLX.", fractal);
 	printf("MLX struct allocated within fractal.\n"); // DEBUG
     fractal->zoom = 1.0;	//a separete function at some pont
     fractal->offset_x = 0;
