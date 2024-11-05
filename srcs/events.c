@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:18:56 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/04 05:48:35 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/05 19:18:50 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	close_callback(void *param)
 	fractal = (t_fractol *)param;
 	if (!fractal->mlx || !fractal->mlx->mlx)
 		error("close_callback", "Error. Fractal or MLX is not initialized properly\n", fractal);
-	printf("Window close callback invoked.\n");
+	ft_putstr_fd("Window close callback invoked. Closing window...\n", 2);
 	mlx_close_window(fractal->mlx->mlx);
 }
 
@@ -54,4 +54,27 @@ void	scroll_callback(double xdelta, double ydelta, void *param)
 		fractal->zoom *= ZOOM_FACTOR;
 	else if (ydelta < 0)
 		fractal->zoom /= ZOOM_FACTOR;
+}
+
+void	resize_handler(int new_width, int new_height, void	*param)
+{
+	t_fractol	*fractal;
+	double		aspect_ratio;
+	double		real_range;
+	
+	fractal = (t_fractol *)param;
+	if (new_height != fractal->height || new_width != fractal->width)
+	{
+		fractal->height = new_height;
+		fractal->width = new_width;
+		aspect_ratio = (double)fractal->width / fractal->height;
+		real_range = 2.0 * aspect_ratio;
+		fractal->min_real = -real_range / fractal->zoom + fractal->offset_x;
+		fractal->max_real = real_range / fractal->zoom + fractal->offset_x;
+		fractal->min_imag = -2.0 / fractal->zoom + fractal->offset_y;
+		fractal->max_imag = 2.0 / fractal->zoom + fractal->offset_y;
+		mlx_delete_image(fractal->mlx->mlx, fractal->mlx->image);
+		fractal->mlx->image = mlx_new_image(fractal->mlx->mlx, fractal->width, fractal->height);
+		render_fractal(fractal);
+	}
 }

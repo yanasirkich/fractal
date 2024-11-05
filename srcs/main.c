@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:30 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/04 20:24:33 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/05 19:13:51 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv)
 	mlx_key_hook(fractal->mlx->mlx, key_callback, fractal); 
 	mlx_close_hook(fractal->mlx->mlx, close_callback, fractal);
 	mlx_scroll_hook(fractal->mlx->mlx, scroll_callback, fractal);
+	mlx_resize_hook(fractal->mlx->mlx, resize_handler, fractal);
 	mlx_loop_hook((mlx_t *)fractal->mlx->mlx, render_fractal, fractal);
 	
 	printf("Entering MLX loop...\n"); 	//DEBUG						//DEBUG

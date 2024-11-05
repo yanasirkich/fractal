@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/05 09:41:17 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/05 19:17:37 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_fractol
 {
 	int			type;
 	double		zoom;
+	int			height;
+	int			width;
 	double		offset_x;
 	double		offset_y;
 	double		min_real;
@@ -54,7 +56,6 @@ typedef struct s_fractol
 int	error (const char *function, char *text, t_fractol *fractal);
 //innits
 t_fractol	*fractal_init(char *name);
-t_mlx		*init_mlx(t_fractol *fractal);
 //rendering
 void	render_fractal(void *smthg);
 int	get_rgb(int iterations, t_fractol *fractal);
@@ -65,5 +66,6 @@ int	julia_pixel(t_fractol *fractal, int x, int y);
 void	key_callback(mlx_key_data_t keydata, void *param);
 void	close_callback(void *param);
 void	scroll_callback(double xdelta, double ydelta, void *param);
+void	resize_handler(int new_width, int new_height, void	*param);
 
 #endif

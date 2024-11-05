@@ -6,13 +6,14 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 22:01:46 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/05 09:43:21 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/05 19:33:47 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 static void fractal_defaults_init(t_fractol *fractal);
+static t_mlx	*init_mlx(t_fractol *fractal);
 
 t_fractol	*fractal_init(char *name)
 {
@@ -55,13 +56,13 @@ t_fractol	*fractal_init(char *name)
 	return (fractal);
 }
 
-t_mlx	*init_mlx(t_fractol *fractal)
+static t_mlx	*init_mlx(t_fractol *fractal)
 {
 	fractal->mlx = malloc(sizeof(t_mlx));
 	if (!fractal->mlx)
 		error("init_mlx","Error. Memory allocation for MLX failed\n", fractal);
 	printf("Allocated MLX struct.\n"); //DEBUG
-	fractal->mlx->mlx = mlx_init(WIDTH, HEIGHT, "Fractol Window", false);
+	fractal->mlx->mlx = mlx_init(WIDTH, HEIGHT, "Fractol Window", true);
 	if(!fractal->mlx->mlx)
 		error("init_mlx", "Error initializing MLX42 instance.\n", fractal);
 	printf("MLX initialized successfully.\n");				//DEBUG
@@ -77,7 +78,7 @@ static void fractal_defaults_init(t_fractol *fractal)
 	fractal->zoom = 2;
     fractal->offset_x = 0.0;
     fractal->offset_y = 0.0;
-    fractal->max_iterations = 100;
+    fractal->max_iterations = 500;
     fractal->min_real = 0.0;
     fractal->max_real = 0.0; 
     fractal->min_imag = 0.0; 
@@ -85,4 +86,6 @@ static void fractal_defaults_init(t_fractol *fractal)
     fractal->cx = 0.0; 
     fractal->cy = 0.0; 
     fractal->type = 0;
+	fractal->width = WIDTH;
+	fractal->height = HEIGHT;
 }
