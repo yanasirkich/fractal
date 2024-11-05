@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/04 20:28:04 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/05 09:41:17 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "./lib/MLX42/include/MLX42/MLX42.h"
 # include "./lib/libft/libft.h"
 
-# define WIDTH 1280
+# define WIDTH 1500
 # define HEIGHT 720
 
 # define BLACK 0x000000
