@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:30 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/05 19:13:51 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:29:30 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 	
 	printf("Entering MLX loop...\n"); 	//DEBUG						//DEBUG
 	
-	mlx_loop(fractal->mlx->mlx);//gonna handle events
+	mlx_loop(fractal->mlx->mlx);
 
 	mlx_delete_image(fractal->mlx->mlx, fractal->mlx->image);
     mlx_terminate(fractal->mlx->mlx);

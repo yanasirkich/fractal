@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:18:56 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/05 19:18:50 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:20:25 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	key_callback(mlx_key_data_t keydata, void *param) //close the window when the escape key is pressed.
 {
 	t_fractol	*fractal;
+	double		step;
 	
 	if (!param)
         error("key_callback", "Error. Key callback called with NULL param\n", NULL);
@@ -25,6 +26,19 @@ void	key_callback(mlx_key_data_t keydata, void *param) //close the window when t
 	{
 		ft_putstr_fd("Escape key pressed. Closing window...\n", 2);
 		mlx_close_window(fractal->mlx->mlx);
+	}
+	step = MOVE_STEP / fractal->zoom;
+	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+	{
+		if (keydata.key == MLX_KEY_LEFT)
+			fractal->offset_x -= step;
+		else if (keydata.key == MLX_KEY_RIGHT)
+			fractal->offset_x += step;
+		else if (keydata.key == MLX_KEY_UP)
+			fractal->offset_y -= step;
+		else if (keydata.key == MLX_KEY_DOWN)
+			fractal->offset_y += step;
+		render_fractal(fractal);
 	}
 }
 

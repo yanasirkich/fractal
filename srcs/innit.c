@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 22:01:46 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/05 19:33:47 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:36:08 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void fractal_defaults_init(t_fractol *fractal);
 static t_mlx	*init_mlx(t_fractol *fractal);
+static void		mandelbrot_init(t_fractol *fractal, double aspect_ratio);
+static void	julia_init(t_fractol *fractal, double real_range);
 
 t_fractol	*fractal_init(char *name)
 {
@@ -32,25 +34,9 @@ t_fractol	*fractal_init(char *name)
 	aspect_ratio = (double)WIDTH / HEIGHT;
 	real_range = 2.0 * aspect_ratio;
 	if (ft_strcmp(name, "Mandelbrot") == 0 || ft_strcmp(name, "mandelbrot") == 0)
-	{
-		fractal->min_real = -2.0 * aspect_ratio;
-        fractal->max_real = 2.0 * aspect_ratio;
-        fractal->min_imag = -2;
-        fractal->max_imag = 2;
-		fractal->type = 1;
-		printf("Mandelbrot parameters set.\n"); 	//DEBUG
-	}
+		mandelbrot_init(fractal, aspect_ratio);
 	else if (ft_strcmp(name, "Julia") == 0 || ft_strcmp(name, "julia") == 0)
-	{
-		fractal->min_real = -real_range / fractal->zoom + fractal->offset_x;
-		fractal->max_real = real_range / fractal->zoom + fractal->offset_x;
-		fractal->min_imag = -2.0 / fractal->zoom + fractal->offset_y;
-		fractal->max_imag = 2.0 / fractal->zoom + fractal->offset_y;
-		fractal->cx = -0.7; //constants for julia 
-		fractal->cy = 0.27015;
-		fractal->type = 2;
-		printf("JUlia parameters set.\n");  		//DEBUG
-	}
+		julia_init(fractal, real_range);
 	else
 		error("fractal_init", "Error. Invalid fractal name provided.\n", fractal);
 	return (fractal);
@@ -88,4 +74,26 @@ static void fractal_defaults_init(t_fractol *fractal)
     fractal->type = 0;
 	fractal->width = WIDTH;
 	fractal->height = HEIGHT;
+}
+
+static void	mandelbrot_init(t_fractol *fractal, double aspect_ratio)
+{
+	fractal->min_real = -2.0 * aspect_ratio;
+    fractal->max_real = 2.0 * aspect_ratio;
+    fractal->min_imag = -2;
+    fractal->max_imag = 2;
+	fractal->type = 1;
+	printf("Mandelbrot parameters set.\n"); 	//DEBUG
+}
+
+static void	julia_init(t_fractol *fractal, double real_range)
+{
+	fractal->min_real = -real_range / fractal->zoom + fractal->offset_x;
+		fractal->max_real = real_range / fractal->zoom + fractal->offset_x;
+		fractal->min_imag = -2.0 / fractal->zoom + fractal->offset_y;
+		fractal->max_imag = 2.0 / fractal->zoom + fractal->offset_y;
+		fractal->cx = -0.7; //constants for julia 
+		fractal->cy = 0.27015;
+		fractal->type = 2;
+		printf("JUlia parameters set.\n");  		//DEBUG
 }

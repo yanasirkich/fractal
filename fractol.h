@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/05 19:17:37 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:10:25 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,15 @@
 # define HEIGHT 720
 
 # define BLACK 0x000000
+
 # define ZOOM_FACTOR 1.1 //10% zoom maybe do 1.05 in the future
+
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define MOVE_STEP 0.1 // dont forget to adjust after checking out
+
 
 //mlx instance is stored inside the fractal struct
 typedef struct	s_mlx
