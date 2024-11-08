@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/07 10:10:25 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/08 02:38:02 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_fractol
 }	t_fractol;
 
 //other
-int	error (const char *function, char *text, t_fractol *fractal);
+int	error (char *function, char *text, t_fractol *fractal);
 //innits
 t_fractol	*fractal_init(char *name);
 //rendering

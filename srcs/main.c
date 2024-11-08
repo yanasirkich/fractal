@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:30 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/07 10:29:30 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/08 02:37:46 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-int	error (const char *function, char *text, t_fractol *fractal)
+int	error (char *function, char *text, t_fractol *fractal)
 {
 	if (function)
-		fprintf(stderr, "Error in %s: ", function);
+		ft_putstr_fd(function, 2);
 	if (text)
 		ft_putstr_fd(text, 2);
 	if (fractal)
