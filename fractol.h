@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:00:12 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/08 02:38:02 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:08:34 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,25 @@ typedef struct s_fractol
 	int			max_iterations;
 	double		cx; //for julia
 	double		cy; //for julia
+	double		aspect_ratio;
+	double		real_range;
 	t_mlx		*mlx; //pointer to mlx
 }	t_fractol;
 
 //other
-int	error (char *function, char *text, t_fractol *fractal);
+int			error (char *function, char *text, t_fractol *fractal);
 //innits
 t_fractol	*fractal_init(char *name);
 //rendering
-void	render_fractal(void *smthg);
-int	get_rgb(int iterations, t_fractol *fractal);
+void		render_fractal(void *smthg);
+int			get_rgb(int iterations, t_fractol *fractal);
 //fractals
-int	mandelbrot_pixel(t_fractol *fractal, int x, int y);
-int	julia_pixel(t_fractol *fractal, int x, int y);
+int			mandelbrot_pixel(t_fractol *fractal, int x, int y);
+int			julia_pixel(t_fractol *fractal, int x, int y);
 //events
-void	key_callback(mlx_key_data_t keydata, void *param);
-void	close_callback(void *param);
-void	scroll_callback(double xdelta, double ydelta, void *param);
-void	resize_handler(int new_width, int new_height, void	*param);
+void		key_callback(mlx_key_data_t keydata, void *param);
+void		close_callback(void *param);
+void		scroll_callback(double xdelta, double ydelta, void *param);
+void		resize_handler(int new_width, int new_height, void	*param);
 
 #endif

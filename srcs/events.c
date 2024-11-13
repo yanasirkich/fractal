@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:18:56 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/07 10:20:25 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/13 09:47:59 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	scroll_callback(double xdelta, double ydelta, void *param)
 		fractal->zoom *= ZOOM_FACTOR;
 	else if (ydelta < 0)
 		fractal->zoom /= ZOOM_FACTOR;
+	render_fractal(fractal);
 }
 
 void	resize_handler(int new_width, int new_height, void	*param)

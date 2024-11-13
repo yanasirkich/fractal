@@ -6,7 +6,7 @@
 /*   By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 21:54:49 by ysirkich          #+#    #+#             */
-/*   Updated: 2024/11/05 19:11:57 by ysirkich         ###   ########.fr       */
+/*   Updated: 2024/11/13 10:13:18 by ysirkich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ void	render_fractal(void *smthg) //generating and displaying fractals
 	mlx = fractal->mlx;
 	if (!fractal || !fractal->mlx || !fractal->mlx->image) 
     	error("render_fractal", "Error. fractal or fractal->mlx or mlx->image is NULL\n", fractal);
+	fractal->aspect_ratio = (double)fractal->width / fractal->height;
+	fractal->real_range = 2.0 * fractal->aspect_ratio / fractal->zoom;
+	fractal->min_real = -fractal->real_range + fractal->offset_x;
+	fractal->max_real = fractal->real_range + fractal->offset_x;
+	fractal->min_imag = -2.0 / fractal->zoom + fractal->offset_y;
+	fractal->max_imag = 2.0 / fractal->zoom + fractal->offset_y;
 	y = 0;
 	while (y < fractal->height)
 	{

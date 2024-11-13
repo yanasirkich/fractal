@@ -6,7 +6,7 @@
 #    By: ysirkich <ysirkich@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/13 13:33:17 by ysirkich          #+#    #+#              #
-#    Updated: 2024/11/04 20:36:50 by ysirkich         ###   ########.fr        #
+#    Updated: 2024/11/13 09:42:06 by ysirkich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS = -Wall	-Wextra	-Werror -g
 INCLUDE	=-I. -I$(LIBFT_DIR) -I$(LIBMLX_DIR)
 
 # GLFW path for macOS(comment out when on Linux)
-GLFW_PATH = /opt/homebrew/opt/glfw
+#GLFW_PATH = /opt/homebrew/opt/glfw
 
 LIBMLX_DIR = ./lib/MLX42
 LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a 
@@ -26,9 +26,9 @@ LIBFT_DIR = ./lib/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # Linux
-#LIBS = $(LIBFT) $(LIBMLX) -ldl -lm -lglfw -lGL
+LIBS = $(LIBFT) $(LIBMLX) -ldl -lm -lglfw -lGL
 # MacOS
-LIBS = $(LIBFT) $(LIBMLX) -L$(GLFW_PATH)/lib -ldl -lm -lglfw -framework OpenGL
+#LIBS = $(LIBFT) $(LIBMLX) -L$(GLFW_PATH)/lib -ldl -lm -lglfw -framework OpenGL
 
 # Source directories
 SRCS_DIR = srcs
